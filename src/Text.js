@@ -10,8 +10,11 @@ class Text extends React.Component {
     let text = [];
 
     if (SearchText.searchText.length > 0) {
+
+      const words = SearchText.searchText.split(' ').filter(v => v.length > 0);
+      let expression = words.join('|');
     
-      const re = new RegExp(SearchText.searchText, 'gi');
+      const re = new RegExp(expression, 'gi');
       const styles = {
         backgroundColor: SearchText.backgroundColor,
         color: SearchText.color,
@@ -27,7 +30,7 @@ class Text extends React.Component {
       }
       text.push(origText.substring(lastIndex, origText.length));
     } else {
-      text.push(<span>{origText}</span>);
+      text.push(<span key={uuid.v4()}>{origText}</span>);
     }
 
     return (
